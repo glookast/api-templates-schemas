@@ -3,7 +3,7 @@ apply plugin: "maven"
 apply plugin: "signing"
 
 group = "com.glookast.api"
-version = "1.2.0"
+version = "1.3.0"
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -24,7 +24,7 @@ configurations {
 
 dependencies {
     schemas "com.glookast.commons:commons-base-schemas:1.0.0"
-    schemas "com.glookast.commons:commons-templates-schemas:1.2.0"
+    schemas "com.glookast.commons:commons-templates-schemas:1.3.0"
 }
 
 def generatedResourcesDir = file("generated/main/resources")
