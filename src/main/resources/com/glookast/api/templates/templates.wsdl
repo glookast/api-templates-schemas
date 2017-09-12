@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://templates.api.glookast.com"
+             xmlns:base="http://base.commons.glookast.com"
+             xmlns:tmpl="http://templates.commons.glookast.com"
+             name="Templates"
+             targetNamespace="http://templates.api.glookast.com">
+    <types>
+        <xs:schema xmlns:tns="http://templates.api.glookast.com"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:base="http://base.commons.glookast.com"
+                   xmlns:tmpl="http://templates.commons.glookast.com"
+                   version="1.0"
+                   targetNamespace="http://templates.api.glookast.com">
+            <xs:import namespace="http://base.commons.glookast.com" schemaLocation="../../commons/base/base.xsd" />
+            <xs:import namespace="http://templates.commons.glookast.com" schemaLocation="../../commons/templates/templates.xsd" />
+
+            <!-- request wrapper types -->
+            <xs:complexType name="RequestVoid" />
+
+            <xs:complexType name="RequestOnlyLicensed">
+                <xs:sequence>
+                    <xs:element name="onlyLicensed" type="xs:boolean" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="RequestStorageSystemId">
+                <xs:sequence>
+                    <xs:element name="storageSystemId" type="base:UUID" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="RequestStorageSystem">
+                <xs:sequence>
+                    <xs:element name="storageSystem" type="tmpl:StorageSystem" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="RequestMetadataSystemId">
+                <xs:sequence>
+                    <xs:element name="metadataSystemId" type="base:UUID" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="RequestMetadataSystem">
+                <xs:sequence>
+                    <xs:element name="metadataSystem" type="tmpl:MetadataSystem" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="RequestOutputSystemId">
+                <xs:sequence>
+                    <xs:element name="outputSystemId" type="base:UUID" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="RequestOutputSystem">
+                <xs:sequence>
+                    <xs:element name="outputSystem" type="tmpl:OutputSystem" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="RequestTransformProfileId">
+                <xs:sequence>
+                    <xs:element name="transformProfileId" type="base:UUID" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="RequestTransformProfile">
+                <xs:sequence>
+                    <xs:element name="transformProfile" type="tmpl:TransformProfile" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="RequestTemplateId">
+                <xs:sequence>
+                    <xs:element name="templateId" type="base:UUID" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="RequestTemplate">
+                <xs:sequence>
+                    <xs:element name="template" type="tmpl:Template" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="TemplatesExceptionInfo">
+                <xs:sequence>
+                    <xs:element name="errorCode" type="xs:int" minOccurs="1" maxOccurs="1"/>
+                    <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1" />
+                    <xs:element name="detail" type="xs:string" minOccurs="0" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <!-- request elements -->
+            <!-- StorageSystem -->
+            <xs:element name="getStorageSystems" type="tns:RequestVoid" />
+            <xs:element name="setStorageSystem" type="tns:RequestStorageSystem" />
+            <xs:element name="delStorageSystem" type="tns:RequestStorageSystemId" />
+
+            <!-- MetadataSystem -->
+            <xs:element name="getMetadataSystems" type="tns:RequestVoid" />
+            <xs:element name="setMetadataSystem" type="tns:RequestMetadataSystem" />
+            <xs:element name="delMetadataSystem" type="tns:RequestMetadataSystemId" />
+
+            <!-- OutputSystem -->
+            <xs:element name="getOutputSystems" type="tns:RequestVoid" />
+            <xs:element name="setOutputSystem" type="tns:RequestOutputSystem" />
+            <xs:element name="delOutputSystem" type="tns:RequestOutputSystemId" />
+
+            <!-- Formats -->
+            <xs:element name="getVideoFormats" type="tns:RequestOnlyLicensed" />
+            <xs:element name="getAudioFormats" type="tns:RequestOnlyLicensed" />
+            <xs:element name="getContainerFormats" type="tns:RequestOnlyLicensed" />
+
+            <!-- TransformProfile -->
+            <xs:element name="getTransformProfiles" type="tns:RequestVoid" />
+            <xs:element name="setTransformProfile" type="tns:RequestTransformProfile" />
+            <xs:element name="delTransformProfile" type="tns:RequestTransformProfileId" />
+
+            <!-- Template -->
+            <xs:element name="getTemplates" type="tns:RequestVoid" />
+            <xs:element name="setTemplate" type="tns:RequestTemplate" />
+            <xs:element name="delTemplate" type="tns:RequestTemplateId" />
+
+            <!-- exceptions -->
+            <xs:element name="templatesException" type="tns:TemplatesExceptionInfo" />
+
+            <!-- response wrapper types -->
+
+            <xs:complexType name="ResponseBoolean">
+                <xs:sequence>
+                    <xs:element name="return" type="xs:boolean" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="ResponseStorageSystem">
+                <xs:sequence>
+                    <xs:element name="return" type="tmpl:StorageSystem" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="ResponseListStorageSystem">
+                <xs:sequence>
+                    <xs:element name="return" type="tmpl:StorageSystem" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="ResponseMetadataSystem">
+                <xs:sequence>
+                    <xs:element name="return" type="tmpl:MetadataSystem" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="ResponseListMetadataSystem">
+                <xs:sequence>
+                    <xs:element name="return" type="tmpl:MetadataSystem" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="ResponseOutputSystem">
+                <xs:sequence>
+                    <xs:element name="return" type="tmpl:OutputSystem" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="ResponseListOutputSystem">
+                <xs:sequence>
+                    <xs:element name="return" type="tmpl:OutputSystem" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="ResponseListVideoFormat">
+                <xs:sequence>
+                    <xs:element name="return" type="tmpl:VideoFormat" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="ResponseListAudioFormat">
+                <xs:sequence>
+                    <xs:element name="return" type="tmpl:AudioFormat" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="ResponseListContainerFormat">
+                <xs:sequence>
+                    <xs:element name="return" type="tmpl:ContainerFormat" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="ResponseTransformProfile">
+                <xs:sequence>
+                    <xs:element name="return" type="tmpl:TransformProfile" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="ResponseListTransformProfile">
+                <xs:sequence>
+                    <xs:element name="return" type="tmpl:TransformProfile" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="ResponseTemplate">
+                <xs:sequence>
+                    <xs:element name="return" type="tmpl:Template" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="ResponseListTemplate">
+                <xs:sequence>
+                    <xs:element name="return" type="tmpl:Template" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:complexType>
+
+            <!-- response elements -->
+
+            <xs:element name="responseBoolean" type="tns:ResponseBoolean" />
+            <xs:element name="responseStorageSystem" type="tns:ResponseStorageSystem" />
+            <xs:element name="responseListStorageSystem" type="tns:ResponseListStorageSystem" />
+            <xs:element name="responseMetadataSystem" type="tns:ResponseMetadataSystem" />
+            <xs:element name="responseListMetadataSystem" type="tns:ResponseListMetadataSystem" />
+            <xs:element name="responseOutputSystem" type="tns:ResponseOutputSystem" />
+            <xs:element name="responseListOutputSystem" type="tns:ResponseListOutputSystem" />
+            <xs:element name="responseListVideoFormat" type="tns:ResponseListVideoFormat" />
+            <xs:element name="responseListAudioFormat" type="tns:ResponseListAudioFormat" />
+            <xs:element name="responseListContainerFormat" type="tns:ResponseListContainerFormat" />
+            <xs:element name="responseTransformProfile" type="tns:ResponseTransformProfile" />
+            <xs:element name="responseListTransformProfile" type="tns:ResponseListTransformProfile" />
+            <xs:element name="responseTemplate" type="tns:ResponseTemplate" />
+            <xs:element name="responseListTemplate" type="tns:ResponseListTemplate" />
+
+        </xs:schema>
+    </types>
+
+    <!-- response messages -->
+    <message name="responseVoid">
+        <part name="parameters" element="tns:responseVoid" />
+    </message>
+    <message name="responseBoolean">
+        <part name="parameters" element="tns:responseBoolean" />
+    </message>
+
+    <message name="responseStorageSystem">
+        <part name="parameters" element="tns:responseStorageSystem" />
+    </message>
+    <message name="responseListStorageSystem">
+        <part name="parameters" element="tns:responseListStorageSystem" />
+    </message>
+    <message name="responseMetadataSystem">
+        <part name="parameters" element="tns:responseMetadataSystem" />
+    </message>
+    <message name="responseListMetadataSystem">
+        <part name="parameters" element="tns:responseListMetadataSystem" />
+    </message>
+    <message name="responseOutputSystem">
+        <part name="parameters" element="tns:responseOutputSystem" />
+    </message>
+    <message name="responseListOutputSystem">
+        <part name="parameters" element="tns:responseListOutputSystem" />
+    </message>
+    <message name="responseListVideoFormat">
+        <part name="parameters" element="tns:responseListVideoFormat" />
+    </message>
+    <message name="responseListAudioFormat">
+        <part name="parameters" element="tns:responseListAudioFormat" />
+    </message>
+    <message name="responseListContainerFormat">
+        <part name="parameters" element="tns:responseListContainerFormat" />
+    </message>
+    <message name="responseTransformProfile">
+        <part name="parameters" element="tns:responseTransformProfile" />
+    </message>
+    <message name="responseListTransformProfile">
+        <part name="parameters" element="tns:responseListTransformProfile" />
+    </message>
+    <message name="responseTemplate">
+        <part name="parameters" element="tns:responseTemplate" />
+    </message>
+    <message name="responseListTemplate">
+        <part name="parameters" element="tns:responseListTemplate" />
+    </message>
+
+    <!-- request messages -->
+    <message name="getStorageSystems">
+        <part name="parameters" element="tns:getStorageSystems" />
+    </message>
+    <message name="setStorageSystem">
+        <part name="parameters" element="tns:setStorageSystem" />
+    </message>
+    <message name="delStorageSystem">
+        <part name="parameters" element="tns:delStorageSystem" />
+    </message>
+
+    <message name="getMetadataSystems">
+        <part name="parameters" element="tns:getMetadataSystems" />
+    </message>
+    <message name="setMetadataSystem">
+        <part name="parameters" element="tns:setMetadataSystem" />
+    </message>
+    <message name="delMetadataSystem">
+        <part name="parameters" element="tns:delMetadataSystem" />
+    </message>
+
+    <message name="getOutputSystems">
+        <part name="parameters" element="tns:getOutputSystems" />
+    </message>
+    <message name="setOutputSystem">
+        <part name="parameters" element="tns:setOutputSystem" />
+    </message>
+    <message name="delOutputSystem">
+        <part name="parameters" element="tns:delOutputSystem" />
+    </message>
+
+    <message name="getVideoFormats">
+        <part name="parameters" element="tns:getVideoFormats" />
+    </message>
+    <message name="getAudioFormats">
+        <part name="parameters" element="tns:getAudioFormats" />
+    </message>
+    <message name="getContainerFormats">
+        <part name="parameters" element="tns:getContainerFormats" />
+    </message>
+
+    <message name="getTransformProfiles">
+        <part name="parameters" element="tns:getTransformProfiles" />
+    </message>
+    <message name="setTransformProfile">
+        <part name="parameters" element="tns:setTransformProfile" />
+    </message>
+    <message name="delTransformProfile">
+        <part name="parameters" element="tns:delTransformProfile" />
+    </message>
+
+    <message name="getTemplates">
+        <part name="parameters" element="tns:getTemplates" />
+    </message>
+    <message name="setTemplate">
+        <part name="parameters" element="tns:setTemplate" />
+    </message>
+    <message name="delTemplate">
+        <part name="parameters" element="tns:delTemplate" />
+    </message>
+
+    <message name="templatesException">
+        <part name="fault" element="tns:templatesException" />
+    </message>
+
+    <portType name="TemplatesPort">
+        <operation name="getStorageSystems">
+            <input message="tns:getStorageSystems" />
+            <output message="tns:responseListStorageSystem" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="setStorageSystem">
+            <input message="tns:setStorageSystem" />
+            <output message="tns:responseStorageSystem" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="delStorageSystem">
+            <input message="tns:delStorageSystem" />
+            <output message="tns:responseBoolean" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="getMetadataSystems">
+            <input message="tns:getMetadataSystems" />
+            <output message="tns:responseListMetadataSystem" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="setMetadataSystem">
+            <input message="tns:setMetadataSystem" />
+            <output message="tns:responseMetadataSystem" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="delMetadataSystem">
+            <input message="tns:delMetadataSystem" />
+            <output message="tns:responseBoolean" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="getOutputSystems">
+            <input message="tns:getOutputSystems" />
+            <output message="tns:responseListOutputSystem" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="setOutputSystem">
+            <input message="tns:setOutputSystem" />
+            <output message="tns:responseOutputSystem" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="delOutputSystem">
+            <input message="tns:delOutputSystem" />
+            <output message="tns:responseBoolean" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="getVideoFormats">
+            <input message="tns:getVideoFormats" />
+            <output message="tns:responseListVideoFormat" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="getAudioFormats">
+            <input message="tns:getAudioFormats" />
+            <output message="tns:responseListAudioFormat" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="getContainerFormats">
+            <input message="tns:getContainerFormats" />
+            <output message="tns:responseListContainerFormat" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="getTransformProfiles">
+            <input message="tns:getTransformProfiles" />
+            <output message="tns:responseListTransformProfile" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="setTransformProfile">
+            <input message="tns:setTransformProfile" />
+            <output message="tns:responseTransformProfile" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="delTransformProfile">
+            <input message="tns:delTransformProfile" />
+            <output message="tns:responseBoolean" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="getTemplates">
+            <input message="tns:getTemplates" />
+            <output message="tns:responseListTemplate" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="setTemplate">
+            <input message="tns:setTemplate" />
+            <output message="tns:responseTemplate" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="delTemplate">
+            <input message="tns:delTemplate" />
+            <output message="tns:responseBoolean" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+
+    </portType>
+    <binding name="TemplatesBinding" type="tns:TemplatesPort">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+        <operation name="getStorageSystems">
+            <soap:operation soapAction="http://templates.api.glookast.com/getStorageSystems" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="setStorageSystem">
+            <soap:operation soapAction="http://templates.api.glookast.com/setStorageSystem" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="delStorageSystem">
+            <soap:operation soapAction="http://templates.api.glookast.com/delStorageSystem" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="getMetadataSystems">
+            <soap:operation soapAction="http://templates.api.glookast.com/getMetadataSystems" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="setMetadataSystem">
+            <soap:operation soapAction="http://templates.api.glookast.com/setMetadataSystem" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="delMetadataSystem">
+            <soap:operation soapAction="http://templates.api.glookast.com/delMetadataSystem" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="getOutputSystems">
+            <soap:operation soapAction="http://templates.api.glookast.com/getOutputSystems" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="setOutputSystem">
+            <soap:operation soapAction="http://templates.api.glookast.com/setOutputSystem" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="delOutputSystem">
+            <soap:operation soapAction="http://templates.api.glookast.com/delOutputSystem" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="getVideoFormats">
+            <soap:operation soapAction="http://templates.api.glookast.com/getVideoFormats" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="getAudioFormats">
+            <soap:operation soapAction="http://templates.api.glookast.com/getAudioFormats" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="getContainerFormats">
+            <soap:operation soapAction="http://templates.api.glookast.com/getContainerFormats" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="getTransformProfiles">
+            <soap:operation soapAction="http://templates.api.glookast.com/getTransformProfiles" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="setTransformProfile">
+            <soap:operation soapAction="http://templates.api.glookast.com/setTransformProfile" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="delTransformProfile">
+            <soap:operation soapAction="http://templates.api.glookast.com/delTransformProfile" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="getTemplates">
+            <soap:operation soapAction="http://templates.api.glookast.com/getTemplates" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="setTemplate">
+            <soap:operation soapAction="http://templates.api.glookast.com/setTemplate" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="delTemplate">
+            <soap:operation soapAction="http://templates.api.glookast.com/delTemplate" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+    </binding>
+    <service name="TemplatesService">
+        <port name="TemplatesPort" binding="tns:TemplatesBinding">
+            <soap:address location="http://host/path/TemplatesPort" />
+        </port>
+    </service>
+</definitions>
