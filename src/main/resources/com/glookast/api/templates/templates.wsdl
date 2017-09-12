@@ -99,11 +99,13 @@
             <xs:element name="getStorageSystems" type="tns:RequestVoid" />
             <xs:element name="setStorageSystem" type="tns:RequestStorageSystem" />
             <xs:element name="delStorageSystem" type="tns:RequestStorageSystemId" />
+            <xs:element name="testStorageSystem" type="tns:RequestStorageSystem" />
 
             <!-- MetadataSystem -->
             <xs:element name="getMetadataSystems" type="tns:RequestVoid" />
             <xs:element name="setMetadataSystem" type="tns:RequestMetadataSystem" />
             <xs:element name="delMetadataSystem" type="tns:RequestMetadataSystemId" />
+            <xs:element name="testMetadataSystem" type="tns:RequestMetadataSystem" />
 
             <!-- OutputSystem -->
             <xs:element name="getOutputSystems" type="tns:RequestVoid" />
@@ -214,6 +216,12 @@
                 </xs:sequence>
             </xs:complexType>
 
+            <xs:complexType name="ResponsePropertyList">
+                <xs:sequence>
+                    <xs:element name="return" type="base:PropertyList" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+            </xs:complexType>
+
             <!-- response elements -->
 
             <xs:element name="responseBoolean" type="tns:ResponseBoolean" />
@@ -230,6 +238,7 @@
             <xs:element name="responseListTransformProfile" type="tns:ResponseListTransformProfile" />
             <xs:element name="responseTemplate" type="tns:ResponseTemplate" />
             <xs:element name="responseListTemplate" type="tns:ResponseListTemplate" />
+            <xs:element name="responsePropertyList" type="tns:ResponsePropertyList" />
 
         </xs:schema>
     </types>
@@ -281,6 +290,9 @@
     <message name="responseListTemplate">
         <part name="parameters" element="tns:responseListTemplate" />
     </message>
+    <message name="responsePropertyList">
+        <part name="parameters" element="tns:responsePropertyList" />
+    </message>
 
     <!-- request messages -->
     <message name="getStorageSystems">
@@ -292,6 +304,9 @@
     <message name="delStorageSystem">
         <part name="parameters" element="tns:delStorageSystem" />
     </message>
+    <message name="testStorageSystem">
+        <part name="parameters" element="tns:testStorageSystem" />
+    </message>
 
     <message name="getMetadataSystems">
         <part name="parameters" element="tns:getMetadataSystems" />
@@ -301,6 +316,9 @@
     </message>
     <message name="delMetadataSystem">
         <part name="parameters" element="tns:delMetadataSystem" />
+    </message>
+    <message name="testMetadataSystem">
+        <part name="parameters" element="tns:testMetadataSystem" />
     </message>
 
     <message name="getOutputSystems">
@@ -363,6 +381,11 @@
             <output message="tns:responseBoolean" />
             <fault name="templatesException" message="tns:templatesException" />
         </operation>
+        <operation name="testStorageSystem">
+            <input message="tns:testStorageSystem" />
+            <output message="tns:responsePropertyList" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
         <operation name="getMetadataSystems">
             <input message="tns:getMetadataSystems" />
             <output message="tns:responseListMetadataSystem" />
@@ -376,6 +399,11 @@
         <operation name="delMetadataSystem">
             <input message="tns:delMetadataSystem" />
             <output message="tns:responseBoolean" />
+            <fault name="templatesException" message="tns:templatesException" />
+        </operation>
+        <operation name="testMetadataSystem">
+            <input message="tns:testMetadataSystem" />
+            <output message="tns:responsePropertyList" />
             <fault name="templatesException" message="tns:templatesException" />
         </operation>
         <operation name="getOutputSystems">
@@ -460,6 +488,12 @@
             <output><soap:body use="literal" /></output>
             <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
         </operation>
+        <operation name="testStorageSystem">
+            <soap:operation soapAction="http://templates.api.glookast.com/testStorageSystem" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
         <operation name="getMetadataSystems">
             <soap:operation soapAction="http://templates.api.glookast.com/getMetadataSystems" />
             <input><soap:body use="literal" /></input>
@@ -474,6 +508,12 @@
         </operation>
         <operation name="delMetadataSystem">
             <soap:operation soapAction="http://templates.api.glookast.com/delMetadataSystem" />
+            <input><soap:body use="literal" /></input>
+            <output><soap:body use="literal" /></output>
+            <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
+        </operation>
+        <operation name="testMetadataSystem">
+            <soap:operation soapAction="http://templates.api.glookast.com/testMetadataSystem" />
             <input><soap:body use="literal" /></input>
             <output><soap:body use="literal" /></output>
             <fault name="templatesException"><soap:fault name="templatesException" use="literal" /></fault>
